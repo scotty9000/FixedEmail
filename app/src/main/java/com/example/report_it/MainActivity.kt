@@ -10,6 +10,8 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.report_it.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -35,14 +37,21 @@ class MainActivity : AppCompatActivity() {
 
         button2.setOnClickListener {
             val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivityForResult(cameraIntent, REQUEST_CODE)
+            resultLauncher.launch(cameraIntent)
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE && data != null){
-            imageView.setImageBitmap(data.extras!!.get("data") as Bitmap)
+    private val resultLauncher  = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()) {result ->
+        if(result.resultCode == Activity.RESULT_OK) {
+            if(result.data == null) {
+                Toast.makeText(this, "data is null", Toast.LENGTH_SHORT).show()
+            }else {
+                //imageView.setImageBitmap(result.data!!.extras!!.get("data") as Bitmap)
+                Toast.makeText(this, "data is not null", Toast.LENGTH_SHORT).show()
+            }
         }
     }
+
+
 }

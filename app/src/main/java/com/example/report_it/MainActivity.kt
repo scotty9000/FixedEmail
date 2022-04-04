@@ -32,6 +32,8 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var imageFilePath: String
 
+    lateinit var uriForImage: Uri
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -42,8 +44,18 @@ class MainActivity : AppCompatActivity() {
         photoImageView = findViewById(R.id.photoImageView)
 
         button1.setOnClickListener {
-            val emailIntent = Intent(Intent.ACTION_SENDTO,
-            Uri.fromParts("mailto", "scotty9000@gmail.com", null))
+//            val emailIntent = Intent(Intent.ACTION_SENDTO,
+//            Uri.fromParts("mailto", "scotty9000@gmail.com", null))
+//            startActivity(Intent.createChooser(emailIntent, "Send email..."))
+            val emailIntent = Intent(Intent.ACTION_SEND)
+            emailIntent.type = "message/rfc822"
+            val to = arrayOf("scotty9000@gmail.com")
+            emailIntent.putExtra(Intent.EXTRA_EMAIL, to)
+            emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            emailIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+            emailIntent.putExtra(Intent.EXTRA_STREAM, uriForImage)
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "DogShit")
+            emailIntent.putExtra(Intent.EXTRA_TEXT, "attached photo has location embedded")
             startActivity(Intent.createChooser(emailIntent, "Send email..."))
         }
 
@@ -53,6 +65,8 @@ class MainActivity : AppCompatActivity() {
                 val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 val authorities = packageName + ".fileprovider"
                 val imageUri = FileProvider.getUriForFile(this, authorities, imageFile)
+                Log.d("MainActivity", "imageUri =" + imageUri.toString())
+                uriForImage = imageUri
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
                 resultLauncher.launch(cameraIntent)
             } catch(e: Exception) {

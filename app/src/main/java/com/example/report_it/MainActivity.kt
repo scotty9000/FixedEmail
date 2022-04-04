@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.ImageView
@@ -26,7 +27,6 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var button1 : Button
 
-    val REQUEST_CODE = 2000
     private lateinit var photoImageView : ImageView
     private lateinit var button2 : Button
 
@@ -73,16 +73,17 @@ class MainActivity : AppCompatActivity() {
 
     @Throws(IOException::class)
     fun createImageFile(): File {
-        val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
+        val timestamp = SimpleDateFormat("HHmmss", Locale.US).format(Date())
         val imageFileName = "JPEG_" + timestamp +"_"
         val storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         if(!storageDir!!.exists()) storageDir.mkdirs()
         val imageFile = createTempFile(imageFileName, ".jpg", storageDir)
         imageFilePath = imageFile.absolutePath
+        Log.d("MainActivity", imageFilePath )
         return imageFile
     }
 
-    fun setScaledBitmap(): Bitmap {
+    private fun setScaledBitmap(): Bitmap {
         val imageViewWidth = photoImageView.width
         val imageViewHeight = photoImageView.height
 

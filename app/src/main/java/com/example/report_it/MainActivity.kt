@@ -25,8 +25,6 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var button1 : Button
-
     private lateinit var photoImageView : ImageView
     private lateinit var button2 : Button
 
@@ -38,26 +36,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        button1 = findViewById(R.id.button1)
         button2 = findViewById(R.id.button2)
 
         photoImageView = findViewById(R.id.photoImageView)
 
-        button1.setOnClickListener {
-//            val emailIntent = Intent(Intent.ACTION_SENDTO,
-//            Uri.fromParts("mailto", "scotty9000@gmail.com", null))
+//        button1.setOnClickListener {
+////            val emailIntent = Intent(Intent.ACTION_SENDTO,
+////            Uri.fromParts("mailto", "scotty9000@gmail.com", null))
+////            startActivity(Intent.createChooser(emailIntent, "Send email..."))
+//            val emailIntent = Intent(Intent.ACTION_SEND)
+//            emailIntent.type = "message/rfc822"
+//            val to = arrayOf("scotty9000@gmail.com")
+//            emailIntent.putExtra(Intent.EXTRA_EMAIL, to)
+//            emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+//            emailIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+//            emailIntent.putExtra(Intent.EXTRA_STREAM, uriForImage)
+//            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "DogShit")
+//            emailIntent.putExtra(Intent.EXTRA_TEXT, "attached photo has location embedded")
 //            startActivity(Intent.createChooser(emailIntent, "Send email..."))
-            val emailIntent = Intent(Intent.ACTION_SEND)
-            emailIntent.type = "message/rfc822"
-            val to = arrayOf("scotty9000@gmail.com")
-            emailIntent.putExtra(Intent.EXTRA_EMAIL, to)
-            emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            emailIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-            emailIntent.putExtra(Intent.EXTRA_STREAM, uriForImage)
-            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "DogShit")
-            emailIntent.putExtra(Intent.EXTRA_TEXT, "attached photo has location embedded")
-            startActivity(Intent.createChooser(emailIntent, "Send email..."))
-        }
+//        }
+
 
         button2.setOnClickListener {
             try {
@@ -81,6 +79,7 @@ class MainActivity : AppCompatActivity() {
         if(result.resultCode == Activity.RESULT_OK) {
             Toast.makeText(this, "result is ok", Toast.LENGTH_LONG).show()
             photoImageView.setImageBitmap(setScaledBitmap())
+            sendEmail()
             }
         }
 
@@ -112,5 +111,21 @@ class MainActivity : AppCompatActivity() {
         bmOptions.inJustDecodeBounds = false
 
         return BitmapFactory.decodeFile(imageFilePath, bmOptions)
+    }
+
+    private fun sendEmail() {
+//            val emailIntent = Intent(Intent.ACTION_SENDTO,
+//            Uri.fromParts("mailto", "scotty9000@gmail.com", null))
+//            startActivity(Intent.createChooser(emailIntent, "Send email..."))
+        val emailIntent = Intent(Intent.ACTION_SEND)
+        emailIntent.type = "message/rfc822"
+        val to = arrayOf("scotty9000@gmail.com")
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, to)
+        emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        emailIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+        emailIntent.putExtra(Intent.EXTRA_STREAM, uriForImage)
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "DogShit")
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "attached photo has location embedded")
+        startActivity(Intent.createChooser(emailIntent, "Send email..."))
     }
 }

@@ -114,9 +114,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun sendEmail() {
-//            val emailIntent = Intent(Intent.ACTION_SENDTO,
-//            Uri.fromParts("mailto", "scotty9000@gmail.com", null))
-//            startActivity(Intent.createChooser(emailIntent, "Send email..."))
+        val emailSelectorIntent = Intent(Intent.ACTION_SENDTO)
+        emailSelectorIntent.setData(Uri.parse("mailto:"))
         val emailIntent = Intent(Intent.ACTION_SEND)
         emailIntent.type = "message/rfc822"
         val to = arrayOf("scotty9000@gmail.com")

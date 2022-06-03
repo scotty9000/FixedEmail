@@ -5,11 +5,14 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.icu.util.UniversalTimeScale.toBigDecimal
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
+import android.location.LocationRequest
 import androidx.exifinterface.media.ExifInterface
 import android.net.Uri
+import android.os.Build.VERSION.SDK_INT
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
@@ -22,6 +25,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.location.LocationManagerCompat.getCurrentLocation
 import androidx.exifinterface.media.ExifInterface.TAG_GPS_LONGITUDE
 import androidx.exifinterface.media.ExifInterface.TAG_MODEL
 import java.io.File
@@ -29,12 +33,15 @@ import java.io.File.createTempFile
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.function.Consumer
 
 class MainActivity : AppCompatActivity(), LocationListener {
 
     private lateinit var locationManager: LocationManager
     private lateinit var tvGpsLocation: TextView
     private val locationPermissionCode = 2
+    private lateinit var gpsLong : String
+    private lateinit var gpsLat : String
 
     private lateinit var button1 : Button
 
@@ -68,9 +75,9 @@ class MainActivity : AppCompatActivity(), LocationListener {
         ActivityResultContracts.StartActivityForResult()) {result ->
         if(result.resultCode == Activity.RESULT_OK) {
             Toast.makeText(this, "result is ok", Toast.LENGTH_LONG).show()
-            getExifInfo()
-            //sendEmail()
+            //getExifInfo()
             getLocation()
+            //sendEmail()
             } else {
             Toast.makeText(this, "result is bad", Toast.LENGTH_LONG).show()
         }
@@ -100,6 +107,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
         emailIntent.putExtra(Intent.EXTRA_STREAM, uriForImage)
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "DogShit")
         emailIntent.putExtra(Intent.EXTRA_TEXT, "attached photo has location embedded")
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Latitude = " + gpsLat + "Longitude = " + gpsLong)
         startActivity(Intent.createChooser(emailIntent, "Send email..."))
     }
 
@@ -131,11 +139,25 @@ class MainActivity : AppCompatActivity(), LocationListener {
                 != PackageManager.PERMISSION_GRANTED)) {
             ActivityCompat.requestPermissions(this,arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionCode)
         }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
+        //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
+        if (SDK_INT >= android.os.Build.VERSION_CODES.R)
+        locationManager.getCurrentLocation(LocationManager.GPS_PROVIDER, null, this.mainExecutor, locationCallback)
     }
 
     override fun onLocationChanged(location: Location) {
         tvGpsLocation = findViewById(R.id.textView)
-        tvGpsLocation.text = "Latitude: " + location.latitude + " , Longitude: " + location.longitude
+        gpsLat = location.latitude.toBigDecimal().toString()
+        gpsLong = location.longitude.toBigDecimal().toString()
+        tvGpsLocation.text = "Latitude: " + gpsLat + " , Longitude: " + gpsLong
+    }
+
+    private val locationCallback = Consumer<Location> { location ->
+        if (null != location) {
+            tvGpsLocation = findViewById(R.id.textView)
+            gpsLat = location.latitude.toBigDecimal().toString()
+            gpsLong = location.longitude.toBigDecimal().toString()
+            tvGpsLocation.text = "Latitude: " + gpsLat + " , Longitude: " + gpsLong
+            sendEmail()
+        }
     }
 }

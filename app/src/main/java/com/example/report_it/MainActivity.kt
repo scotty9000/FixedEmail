@@ -75,8 +75,9 @@ class MainActivity : AppCompatActivity(), LocationListener {
         ActivityResultContracts.StartActivityForResult()) {result ->
         if(result.resultCode == Activity.RESULT_OK) {
             Toast.makeText(this, "result is ok", Toast.LENGTH_LONG).show()
-            //getExifInfo()
+
             getLocation()
+            //getExifInfo()
             //sendEmail()
             } else {
             Toast.makeText(this, "result is bad", Toast.LENGTH_LONG).show()
@@ -122,9 +123,9 @@ class MainActivity : AppCompatActivity(), LocationListener {
             val modelTag = exif.getAttribute(TAG_MODEL)
             val gpsLongTag = exif.getAttribute(TAG_GPS_LONGITUDE)
             if (modelTag != null)
-                Log.d("MainActivity", modelTag)
+                Log.d("MainActivity", "exif modelTag = " + modelTag)
             if (gpsLongTag != null)
-                Log.d("MainActivity", gpsLongTag)
+                Log.d("MainActivity", "exif gpsLongTag = " + gpsLongTag)
             else
                 Log.d("MainActivity", "gpsLongTag is NULL")
 
@@ -157,6 +158,10 @@ class MainActivity : AppCompatActivity(), LocationListener {
             gpsLat = location.latitude.toBigDecimal().toString()
             gpsLong = location.longitude.toBigDecimal().toString()
             tvGpsLocation.text = "Latitude: " + gpsLat + " , Longitude: " + gpsLong
+
+            var exif = ExifInterface(imageFilePath)
+            exif.setLatLong (location.latitude, location.longitude)
+            exif.saveAttributes()
             sendEmail()
         }
     }

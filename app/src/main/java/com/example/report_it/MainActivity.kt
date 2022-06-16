@@ -35,7 +35,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.function.Consumer
 
-class MainActivity : AppCompatActivity(), LocationListener {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var locationManager: LocationManager
     private lateinit var tvGpsLocation: TextView
@@ -77,8 +77,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
             Toast.makeText(this, "result is ok", Toast.LENGTH_LONG).show()
 
             getLocation()
-            //getExifInfo()
-            //sendEmail()
+
             } else {
             Toast.makeText(this, "result is bad", Toast.LENGTH_LONG).show()
         }
@@ -112,27 +111,6 @@ class MainActivity : AppCompatActivity(), LocationListener {
         startActivity(Intent.createChooser(emailIntent, "Send email..."))
     }
 
-    private fun getExifInfo() {
-
-        Toast.makeText(this, "in getExifInfo", Toast.LENGTH_LONG).show()
-
-
-        try {
-            var exif = ExifInterface(imageFilePath)
-
-            val modelTag = exif.getAttribute(TAG_MODEL)
-            val gpsLongTag = exif.getAttribute(TAG_GPS_LONGITUDE)
-            if (modelTag != null)
-                Log.d("MainActivity", "exif modelTag = " + modelTag)
-            if (gpsLongTag != null)
-                Log.d("MainActivity", "exif gpsLongTag = " + gpsLongTag)
-            else
-                Log.d("MainActivity", "gpsLongTag is NULL")
-
-        } catch (e: Exception) {
-            Toast.makeText(this, "exif fail", Toast.LENGTH_LONG).show()
-        }
-    }
 
     private fun getLocation() {
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -140,17 +118,11 @@ class MainActivity : AppCompatActivity(), LocationListener {
                 != PackageManager.PERMISSION_GRANTED)) {
             ActivityCompat.requestPermissions(this,arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionCode)
         }
-        //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
+
         if (SDK_INT >= android.os.Build.VERSION_CODES.R)
         locationManager.getCurrentLocation(LocationManager.GPS_PROVIDER, null, this.mainExecutor, locationCallback)
     }
-
-    override fun onLocationChanged(location: Location) {
-        tvGpsLocation = findViewById(R.id.textView)
-        gpsLat = location.latitude.toBigDecimal().toString()
-        gpsLong = location.longitude.toBigDecimal().toString()
-        tvGpsLocation.text = "Latitude: " + gpsLat + " , Longitude: " + gpsLong
-    }
+    
 
     private val locationCallback = Consumer<Location> { location ->
         if (null != location) {

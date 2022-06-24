@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity() {
         if (SDK_INT >= android.os.Build.VERSION_CODES.R)
         locationManager.getCurrentLocation(LocationManager.GPS_PROVIDER, null, this.mainExecutor, locationCallback)
     }
-    
+
 
     private val locationCallback = Consumer<Location> { location ->
         if (null != location) {

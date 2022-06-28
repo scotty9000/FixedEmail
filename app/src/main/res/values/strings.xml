@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Report_It</string>
     <string name="Button1">1</string>
-    <string name="Subject">Subject:</string>
-    <string name="Address">Address:</string>
+    <string name="Subject">Hazard observed</string>
+    <string name="Address">scotty9000@gmail.com</string>
+    <string name="enter_email_address">Enter an email address</string>
 </resources>

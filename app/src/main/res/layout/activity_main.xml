@@ -1,42 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ConstraintLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Button1"
-        android:textSize="40sp"
-        tools:layout_editor_absoluteX="33dp"
-        tools:layout_editor_absoluteY="184dp" />
+<layout>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/ConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/editTextTextEmailAddress1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:fontFamily="@font/roboto"
-        android:inputType="textEmailAddress"
-        android:text="@string/Address"
-        android:textSize="@dimen/text_size"
-        tools:layout_editor_absoluteX="142dp"
-        tools:layout_editor_absoluteY="186dp" />
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Button1"
+            android:textSize="40sp"
+            tools:layout_editor_absoluteX="33dp"
+            tools:layout_editor_absoluteY="184dp" />
 
-    <EditText
-        android:id="@+id/editTextEmailSubject"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:fontFamily="@font/roboto"
-        android:inputType="textEmailSubject"
-        android:text="@string/Subject"
-        android:textSize="@dimen/text_size"
-        tools:layout_editor_absoluteX="150dp"
-        tools:layout_editor_absoluteY="248dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+            android:id="@+id/editTextTextEmailAddress1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="@font/roboto"
+            android:hint="@string/enter_email_address"
+            android:inputType="textEmailAddress"
+            android:text="@string/Address"
+            android:textSize="@dimen/text_size"
+            tools:layout_editor_absoluteX="142dp"
+            tools:layout_editor_absoluteY="186dp" />
+
+        <EditText
+            android:id="@+id/editTextEmailSubject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="@font/roboto"
+            android:inputType="textEmailSubject"
+            android:text="@string/Subject"
+            android:textSize="@dimen/text_size"
+            tools:layout_editor_absoluteX="150dp"
+            tools:layout_editor_absoluteY="248dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

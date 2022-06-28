@@ -26,8 +26,10 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.location.LocationManagerCompat.getCurrentLocation
+import androidx.databinding.DataBindingUtil
 import androidx.exifinterface.media.ExifInterface.TAG_GPS_LONGITUDE
 import androidx.exifinterface.media.ExifInterface.TAG_MODEL
+import com.example.report_it.databinding.ActivityMainBinding
 import java.io.File
 import java.io.File.createTempFile
 import java.io.IOException
@@ -36,6 +38,8 @@ import java.util.*
 import java.util.function.Consumer
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
 
     private lateinit var locationManager: LocationManager
     private lateinit var tvGpsLocation: TextView
@@ -51,11 +55,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        //setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        button1 = findViewById(R.id.button1)
-
-        button1.setOnClickListener {
+        binding.button1.setOnClickListener {
             try {
                 val imageFile = createImageFile()
                 val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -126,10 +129,10 @@ class MainActivity : AppCompatActivity() {
 
     private val locationCallback = Consumer<Location> { location ->
         if (null != location) {
-            tvGpsLocation = findViewById(R.id.textView)
+            //tvGpsLocation = findViewById(R.id.textView)
             gpsLat = location.latitude.toBigDecimal().toString()
             gpsLong = location.longitude.toBigDecimal().toString()
-            tvGpsLocation.text = "Latitude: " + gpsLat + " , Longitude: " + gpsLong
+            //tvGpsLocation.text = "Latitude: " + gpsLat + " , Longitude: " + gpsLong
 
             var exif = ExifInterface(imageFilePath)
             exif.setLatLong (location.latitude, location.longitude)

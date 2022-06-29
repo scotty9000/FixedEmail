@@ -40,6 +40,10 @@ import java.util.function.Consumer
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val emailFields: EmailFields = EmailFields("scotty9000@gmail.com",
+        "Hazard observed",
+        "Hazard observed at indicated location, location is also embedded in attached photo"
+    )
 
     private lateinit var locationManager: LocationManager
     private lateinit var tvGpsLocation: TextView
@@ -57,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_main)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.emailFields = emailFields
 
         binding.button1.setOnClickListener {
             try {
@@ -108,8 +113,10 @@ class MainActivity : AppCompatActivity() {
         emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         emailIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         emailIntent.putExtra(Intent.EXTRA_STREAM, uriForImage)
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "DogShit")
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "attached photo has location embedded")
+//        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "DogShit")
+//        emailIntent.putExtra(Intent.EXTRA_TEXT, "attached photo has location embedded")
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, emailFields.subject)
+        emailIntent.putExtra(Intent.EXTRA_TEXT, emailFields.body)
         emailIntent.putExtra(Intent.EXTRA_TEXT, "Latitude = " + gpsLat + "Longitude = " + gpsLong)
         startActivity(Intent.createChooser(emailIntent, "Send email..."))
     }

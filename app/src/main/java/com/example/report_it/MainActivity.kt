@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity() {
     )
 
     private lateinit var locationManager: LocationManager
-    private lateinit var tvGpsLocation: TextView
     private val locationPermissionCode = 2
     private lateinit var gpsLong : String
     private lateinit var gpsLat : String
@@ -59,7 +58,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_main)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.emailFields = emailFields
 
@@ -108,16 +106,13 @@ class MainActivity : AppCompatActivity() {
         emailSelectorIntent.setData(Uri.parse("mailto:"))
         val emailIntent = Intent(Intent.ACTION_SEND)
         emailIntent.type = "message/rfc822"
-        val to = arrayOf("scotty9000@gmail.com")
+        val to = arrayOf(emailFields.address)
         emailIntent.putExtra(Intent.EXTRA_EMAIL, to)
         emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         emailIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         emailIntent.putExtra(Intent.EXTRA_STREAM, uriForImage)
-//        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "DogShit")
-//        emailIntent.putExtra(Intent.EXTRA_TEXT, "attached photo has location embedded")
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, emailFields.subject)
-        emailIntent.putExtra(Intent.EXTRA_TEXT, emailFields.body)
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "Latitude = " + gpsLat + "Longitude = " + gpsLong)
+        emailIntent.putExtra(Intent.EXTRA_TEXT, emailFields.body  + "\n" + "Latitude = " + gpsLat + "\n" + "Longitude = " + gpsLong)
         startActivity(Intent.createChooser(emailIntent, "Send email..."))
     }
 
@@ -136,10 +131,8 @@ class MainActivity : AppCompatActivity() {
 
     private val locationCallback = Consumer<Location> { location ->
         if (null != location) {
-            //tvGpsLocation = findViewById(R.id.textView)
             gpsLat = location.latitude.toBigDecimal().toString()
             gpsLong = location.longitude.toBigDecimal().toString()
-            //tvGpsLocation.text = "Latitude: " + gpsLat + " , Longitude: " + gpsLong
 
             var exif = ExifInterface(imageFilePath)
             exif.setLatLong (location.latitude, location.longitude)

@@ -5,11 +5,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.icu.util.UniversalTimeScale.toBigDecimal
 import android.location.Location
-import android.location.LocationListener
 import android.location.LocationManager
-import android.location.LocationRequest
 import androidx.exifinterface.media.ExifInterface
 import android.net.Uri
 import android.os.Build.VERSION.SDK_INT
@@ -18,17 +15,12 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.core.location.LocationManagerCompat.getCurrentLocation
 import androidx.databinding.DataBindingUtil
-import androidx.exifinterface.media.ExifInterface.TAG_GPS_LONGITUDE
-import androidx.exifinterface.media.ExifInterface.TAG_MODEL
 import com.example.report_it.databinding.ActivityMainBinding
 import java.io.File
 import java.io.File.createTempFile
@@ -50,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var gpsLong : String
     private lateinit var gpsLat : String
 
-    private lateinit var button1 : Button
+    //private lateinit var button1 : Button
 
     lateinit var imageFilePath: String
 
@@ -133,8 +125,7 @@ class MainActivity : AppCompatActivity() {
         if (null != location) {
             gpsLat = location.latitude.toBigDecimal().toString()
             gpsLong = location.longitude.toBigDecimal().toString()
-
-            var exif = ExifInterface(imageFilePath)
+            val exif = ExifInterface(imageFilePath)
             exif.setLatLong (location.latitude, location.longitude)
             exif.saveAttributes()
             sendEmail()

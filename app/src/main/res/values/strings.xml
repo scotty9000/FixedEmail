@@ -4,4 +4,8 @@
     <string name="Subject">Hazard observed</string>
     <string name="Address">scotty9000@gmail.com</string>
     <string name="enter_email_address">Enter an email address</string>
+    <string name="edit_button">EDIT</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="done_button">DONE</string>
 </resources>

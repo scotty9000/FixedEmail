@@ -18,7 +18,9 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -36,6 +38,8 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.function.Consumer
+
+const val EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE"
 
 class MainActivity : AppCompatActivity() {
 
@@ -75,6 +79,20 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this,"Could not create file!", Toast.LENGTH_LONG).show()
             }
         }
+
+        binding.editButton.setOnClickListener {
+            sendMessage()
+        }
+    }
+
+    fun sendMessage () {
+        val editText = emailFields.body
+        val message = editText
+        Log.d("MainActivity", "message =" + message.toString())
+        val intent = Intent(this, EditActivity::class.java).apply{
+            putExtra(EXTRA_MESSAGE, message)
+        }
+        startActivity(intent)
     }
 
     private val resultLauncher  = registerForActivityResult(

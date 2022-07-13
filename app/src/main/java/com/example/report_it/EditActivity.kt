@@ -4,54 +4,64 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import com.example.report_it.databinding.ActivityEditBinding
 
 class EditActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityEditBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_edit)
+        //setContentView(R.layout.activity_edit)
 
         // Get the Intent that started this activity and extract the string
         val message = intent.getStringExtra(EXTRA_MESSAGE)
         Log.d("EditActivity", "message =" + message.toString())
         // Capture the layout's TextView and set the string as its text
-        val textView = findViewById<TextView>(R.id.textView).apply {
-            text = message
+        //val textView = findViewById<TextView>(R.id.textView).apply {
+            //text = message
 
-        // Shared Preference
-        val etname = findViewById<EditText>(R.id.name)
-        val etaddress = findViewById<EditText>(R.id.address)
-        val save = findViewById<EditText>(R.id.saveButton)
-        val get = findViewById<EditText>(R.id.getButton)
-        val clear = findViewById<EditText>(R.id.clearButton)
-        val delete = findViewById<EditText>(R.id.deleteButton)
-        val sharedPref = getSharedPreferences("addName", Context.MODE_PRIVATE)
-        var edit = sharedPref.edit()
+        // create shared preferences file
+        val pref = getPreferences(Context.MODE_PRIVATE)
+        val name = pref.getString("NAME", "")
+        val id = pref.getInt("ID", 0)
+        binding.editName.setText(name)
+        binding.editID.setText(id.toString())
 
-        save.setOnClickListener{
-            edit.putString("name",etname.text.toString())
-            edit.putString("address",etaddress.text.toString())
-            edit.commit()
-            Toast.makeText(this@EditActivity,"data saved", Toast.LENGTH_SHORT).show()
-        }
 
-        get.setOnClickListener{
-            val name = sharedPref.getString("name", "default value")
-            val address = sharedPref.getString("address", "default value")
-            Toast.makeText(this@EditActivity,name+"  address: "+address, Toast.LENGTH_SHORT).show()
-        }
 
-        clear.setOnClickListener{
-            edit.remove("address")
-            edit.commit()
-        }
-        delete.setOnClickListener{
-            edit.clear()
-            edit.commit()
-        }
+       // }
 
-        }
+
+    }
+
+    fun onClear(view: View) {
+        // clear name & ID
+        val pref = getPreferences(Context.MODE_PRIVATE)
+        val editor = pref.edit()
+        editor.clear()
+        editor.commit()
+
+        binding.editID.setText("0")
+        binding.editName.setText("")
+    }
+
+    // create a shared preferences file
+    // and save name and ID as values/pairs in file
+    fun onSave(view: View) {
+        // save name & ID
+        val pref = getPreferences(Context.MODE_PRIVATE)
+        val editor = pref.edit()
+        editor.putString("NAME", binding.editName.text.toString())
+        editor.putInt("ID", binding.editID.text.toString().toInt())
+        editor.commit()
+        val toast = Toast.makeText(applicationContext, "saved", Toast.LENGTH_LONG)
+        toast.show()
+
     }
 }

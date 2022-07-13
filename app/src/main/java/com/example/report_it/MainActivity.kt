@@ -86,8 +86,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun sendMessage () {
-        val editText = emailFields.body
-        val message = editText
+        val message = emailFields.body
         Log.d("MainActivity", "message =" + message.toString())
         val intent = Intent(this, EditActivity::class.java).apply{
             putExtra(EXTRA_MESSAGE, message)

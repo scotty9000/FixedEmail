@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.report_it.databinding.ActivityEditBinding
@@ -26,12 +24,14 @@ class EditActivity : AppCompatActivity() {
         //val textView = findViewById<TextView>(R.id.textView).apply {
             //text = message
 
-        // create shared preferences file
+        // get shared data
         val pref = getPreferences(Context.MODE_PRIVATE)
-        val name = pref.getString("NAME", "")
-        val id = pref.getInt("ID", 0)
-        binding.editName.setText(name)
-        binding.editID.setText(id.toString())
+        val address = pref.getString("Address","")
+        val subject = pref.getString("Subject","")
+        val body = pref.getString("Body","")
+        binding.editAddress.setText(address)
+        binding.editSubject.setText(subject)
+        binding.editBody.setText(body)
 
 
 
@@ -40,25 +40,27 @@ class EditActivity : AppCompatActivity() {
 
     }
 
-    fun onClear(view: View) {
+    fun onClear() {
         // clear name & ID
         val pref = getPreferences(Context.MODE_PRIVATE)
         val editor = pref.edit()
         editor.clear()
         editor.commit()
 
-        binding.editID.setText("0")
-        binding.editName.setText("")
+//        binding.editID.setText("0")
+//        binding.editName.setText("")
     }
 
     // create a shared preferences file
     // and save name and ID as values/pairs in file
     fun onSave(view: View) {
-        // save name & ID
+        // save email Fields
         val pref = getPreferences(Context.MODE_PRIVATE)
         val editor = pref.edit()
-        editor.putString("NAME", binding.editName.text.toString())
-        editor.putInt("ID", binding.editID.text.toString().toInt())
+
+        editor.putString("Address", binding.editAddress.text.toString())
+        editor.putString("Subject", binding.editSubject.text.toString())
+        editor.putString("Body", binding.editBody.text.toString())
         editor.commit()
         val toast = Toast.makeText(applicationContext, "saved", Toast.LENGTH_LONG)
         toast.show()

@@ -9,4 +9,7 @@
     <string name="get">GET</string>
     <string name="clear">CLEAR</string>
     <string name="delete">DELETE</string>
+    <string name="enter_email_body_text">Enter email Body text</string>
+    <string name="enter_email_subject">Enter email Subject</string>
+    <string name="edit_activity_header_text">Edit the email address, subject and body as required</string>
 </resources>

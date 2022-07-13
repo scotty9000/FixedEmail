@@ -63,7 +63,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding.emailFields = emailFields
+        //binding.emailFields = emailFields
+        getEmailFields() // from Shared Preferences File
 
         binding.button1.setOnClickListener {
             try {
@@ -156,5 +157,13 @@ class MainActivity : AppCompatActivity() {
             exif.saveAttributes()
             sendEmail()
         }
+    }
+
+    private fun getEmailFields() {
+        val pref = getPreferences(Context.MODE_PRIVATE)
+        emailFields.address = pref.getString("Address", "").toString()
+        emailFields.subject = pref.getString("Subject", "").toString()
+        emailFields.body = pref.getString("Body", "").toString()
+        binding.emailFields = emailFields
     }
 }

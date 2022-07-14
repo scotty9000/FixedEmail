@@ -160,10 +160,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getEmailFields() {
-        val pref = getPreferences(Context.MODE_PRIVATE)
+        val pref = getSharedPreferences("EmailPrefs", Context.MODE_PRIVATE)
         emailFields.address = pref.getString("Address", "").toString()
         emailFields.subject = pref.getString("Subject", "").toString()
         emailFields.body = pref.getString("Body", "").toString()
         binding.emailFields = emailFields
+        val toast = Toast.makeText(applicationContext, emailFields.address, Toast.LENGTH_LONG)
+        toast.show()
+        Log.d("MainActivity", emailFields.address )
     }
 }

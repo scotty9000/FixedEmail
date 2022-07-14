@@ -27,8 +27,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/editTextTextEmailAddress1"
+        <TextView
+            android:id="@+id/textEmailAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -36,7 +36,7 @@
             android:layout_marginEnd="16dp"
             android:ems="10"
             android:fontFamily="@font/roboto"
-            android:hint="@string/enter_email_address"
+            android:hint="Press EDIT button to edit email address"
             android:inputType="textEmailAddress"
             android:text="@={emailFields.address}"
             android:textSize="@dimen/text_size"
@@ -44,8 +44,8 @@
             app:layout_constraintStart_toEndOf="@+id/button1"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/editTextEmailSubject"
+        <TextView
+            android:id="@+id/textEmailSubject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -53,13 +53,14 @@
             android:layout_marginEnd="16dp"
             android:ems="10"
             android:fontFamily="@font/roboto"
+            android:hint="Press EDIT button to edit email address"
             android:inputType="textEmailSubject"
             android:text="@={emailFields.subject}"
             android:textSize="@dimen/text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.503"
             app:layout_constraintStart_toEndOf="@+id/button1"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress1" />
+            app:layout_constraintTop_toBottomOf="@+id/textEmailAddress" />
 
         <Button
             android:id="@+id/editButton"
@@ -70,5 +71,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

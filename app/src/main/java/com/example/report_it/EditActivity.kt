@@ -25,7 +25,7 @@ class EditActivity : AppCompatActivity() {
             //text = message
 
         // get shared data
-        val pref = getPreferences(Context.MODE_PRIVATE)
+        val pref = getSharedPreferences("EmailPrefs",Context.MODE_PRIVATE)
         val address = pref.getString("Address","")
         val subject = pref.getString("Subject","")
         val body = pref.getString("Body","")
@@ -40,22 +40,23 @@ class EditActivity : AppCompatActivity() {
 
     }
 
-    fun onClear() {
-        // clear name & ID
-        val pref = getPreferences(Context.MODE_PRIVATE)
+    fun onClear(view:View) {
+        // clear email fields
+        val pref = getSharedPreferences("EmailPrefs",Context.MODE_PRIVATE)
         val editor = pref.edit()
         editor.clear()
         editor.commit()
 
-//        binding.editID.setText("0")
-//        binding.editName.setText("")
+        binding.editAddress.setText("")
+        binding.editSubject.setText("")
+        binding.editBody.setText("")
     }
 
     // create a shared preferences file
     // and save name and ID as values/pairs in file
     fun onSave(view: View) {
         // save email Fields
-        val pref = getPreferences(Context.MODE_PRIVATE)
+        val pref = getSharedPreferences("EmailPrefs",Context.MODE_PRIVATE)
         val editor = pref.edit()
 
         editor.putString("Address", binding.editAddress.text.toString())

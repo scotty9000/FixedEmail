@@ -1,6 +1,7 @@
 package com.example.report_it
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -63,8 +64,11 @@ class EditActivity : AppCompatActivity() {
         editor.putString("Subject", binding.editSubject.text.toString())
         editor.putString("Body", binding.editBody.text.toString())
         editor.commit()
-        val toast = Toast.makeText(applicationContext, "saved", Toast.LENGTH_LONG)
-        toast.show()
+
+        val intent = Intent(this, MainActivity::class.java)
+        Log.d("EditActivity", "SAVE pressed")
+        startActivity(intent)
+
 
     }
 }

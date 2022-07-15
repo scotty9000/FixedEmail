@@ -76,23 +76,16 @@ class MainActivity : AppCompatActivity() {
                 uriForImage = imageUri
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
                 resultLauncher.launch(cameraIntent)
-            } catch(e: Exception) {
-                Toast.makeText(this,"Could not create file!", Toast.LENGTH_LONG).show()
+            } catch (e: Exception) {
+                Toast.makeText(this, "Could not create file!", Toast.LENGTH_LONG).show()
             }
         }
 
         binding.editButton.setOnClickListener {
-            sendMessage()
+            val intent = Intent(this, EditActivity::class.java)
+            Log.d("MainActivity", "EDIT pressed")
+            startActivity(intent)
         }
-    }
-
-    fun sendMessage () {
-        val message = emailFields.body
-        Log.d("MainActivity", "message =" + message.toString())
-        val intent = Intent(this, EditActivity::class.java).apply{
-            putExtra(EXTRA_MESSAGE, message)
-        }
-        startActivity(intent)
     }
 
     private val resultLauncher  = registerForActivityResult(

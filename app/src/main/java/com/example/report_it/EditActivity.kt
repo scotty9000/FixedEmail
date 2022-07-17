@@ -16,14 +16,6 @@ class EditActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit)
-        //setContentView(R.layout.activity_edit)
-
-        // Get the Intent that started this activity and extract the string
-        val message = intent.getStringExtra(EXTRA_MESSAGE)
-        Log.d("EditActivity", "message =" + message.toString())
-        // Capture the layout's TextView and set the string as its text
-        //val textView = findViewById<TextView>(R.id.textView).apply {
-            //text = message
 
         // get shared data
         val pref = getSharedPreferences("EmailPrefs",Context.MODE_PRIVATE)
@@ -33,12 +25,6 @@ class EditActivity : AppCompatActivity() {
         binding.editAddress.setText(address)
         binding.editSubject.setText(subject)
         binding.editBody.setText(body)
-
-
-
-       // }
-
-
     }
 
     fun onClear(view:View) {
@@ -68,7 +54,5 @@ class EditActivity : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
         Log.d("EditActivity", "SAVE pressed")
         startActivity(intent)
-
-
     }
 }

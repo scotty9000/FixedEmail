@@ -39,22 +39,18 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.function.Consumer
 
-const val EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE"
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val emailFields: EmailFields = EmailFields("scotty9000@gmail.com",
-        "Hazard observed",
-        "Hazard observed at indicated location, location is also embedded in attached photo"
+    private val emailFields: EmailFields = EmailFields("",
+        "",
+        ""
     )
 
     private lateinit var locationManager: LocationManager
     private val locationPermissionCode = 2
     private lateinit var gpsLong : String
     private lateinit var gpsLat : String
-
-    private lateinit var button1 : Button
 
     lateinit var imageFilePath: String
 
@@ -63,7 +59,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        //binding.emailFields = emailFields
         getEmailFields() // from Shared Preferences File
 
         binding.button1.setOnClickListener {
@@ -91,12 +86,12 @@ class MainActivity : AppCompatActivity() {
     private val resultLauncher  = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()) {result ->
         if(result.resultCode == Activity.RESULT_OK) {
-            Toast.makeText(this, "result is ok", Toast.LENGTH_LONG).show()
+            Log.d("MainActivity", "Camera Intent RESULT OK")
 
             getLocation()
 
             } else {
-            Toast.makeText(this, "result is bad", Toast.LENGTH_LONG).show()
+            Log.d("MainActivity", "Camera Intent RESULT NOT OK")
         }
     }
 
@@ -113,6 +108,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun sendEmail() {
+        Toast.makeText(this, "sending email ...", Toast.LENGTH_LONG).show()
         val emailSelectorIntent = Intent(Intent.ACTION_SENDTO)
         emailSelectorIntent.setData(Uri.parse("mailto:"))
         val emailIntent = Intent(Intent.ACTION_SEND)
@@ -129,6 +125,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun getLocation() {
+        Toast.makeText(this, "getting location ...", Toast.LENGTH_LONG).show()
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED)) {
@@ -149,6 +146,8 @@ class MainActivity : AppCompatActivity() {
             exif.setLatLong (location.latitude, location.longitude)
             exif.saveAttributes()
             sendEmail()
+        } else {
+            Toast.makeText(this, " location is NULL ", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -158,8 +157,6 @@ class MainActivity : AppCompatActivity() {
         emailFields.subject = pref.getString("Subject", "").toString()
         emailFields.body = pref.getString("Body", "").toString()
         binding.emailFields = emailFields
-        val toast = Toast.makeText(applicationContext, emailFields.address, Toast.LENGTH_LONG)
-        toast.show()
         Log.d("MainActivity", emailFields.address )
     }
 }

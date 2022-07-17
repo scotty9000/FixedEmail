@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -10,59 +10,80 @@
         tools:context=".EditActivity">
 
 
-        <LinearLayout
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/addressContainer"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_marginHorizontal="20dp"
+            app:helperText="@string/required"
+            app:helperTextTextColor="@android:color/holo_red_dark"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
 
-            <TextView
-                android:id="@+id/textView"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/addressEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="40sp"
-                android:text="@string/edit_activity_header_text" />
+                android:layout_height="match_parent"
+                android:lines="1"
+                android:inputType="textEmailAddress"
+                android:hint="@string/Address"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/editAddress"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
-                android:ems="10"
-                android:hint="@string/enter_email_address"
-                android:inputType="textEmailAddress" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/subjectContainer"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_marginHorizontal="20dp"
+            app:helperText="@string/required"
+            app:helperTextTextColor="@android:color/holo_red_dark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/addressContainer" >
 
-            <EditText
-                android:id="@+id/editSubject"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/enter_email_subject"
-                android:inputType="textEmailSubject" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/subjectText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:lines="1"
+                android:inputType="textEmailSubject"
+                android:hint="@string/Subject"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/editBody"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/enter_email_body_text"
-                android:inputType="text" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/bodyContainer"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_marginHorizontal="20dp"
+            app:helperText="@string/required"
+            app:helperTextTextColor="@android:color/holo_red_dark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/subjectContainer" >
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:onClick="onSave"
-                android:text="SAVE" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/bodyText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:lines="5"
+                android:inputType="textMultiLine"
+                android:hint="@string/Body"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:onClick="onClear"
-                android:text="CLEAR" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bodyContainer" />
 
-
-        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

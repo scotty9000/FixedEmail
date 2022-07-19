@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -25,24 +26,30 @@ class EditActivity : AppCompatActivity() {
         binding.editAddress.setText(address)
         binding.editSubject.setText(subject)
         binding.editBody.setText(body)
+
+        emailFocusListener()
     }
 
-    fun onClear(view:View) {
-        // clear email fields
-        val pref = getSharedPreferences("EmailPrefs",Context.MODE_PRIVATE)
-        val editor = pref.edit()
-        editor.clear()
-        editor.commit()
-
-        binding.editAddress.setText("")
-        binding.editSubject.setText("")
-        binding.editBody.setText("")
+    private fun emailFocusListener() {
+        binding.editAddress.setOnFocusChangeListener{_, focused ->
+            if(!focused){
+                binding.addressContainer.helperText = validEmail()
+            }
+        }
     }
 
-    // create a shared preferences file
-    // and save name and ID as values/pairs in file
+    private fun validEmail(): String? {
+        val emailAddress = binding.editAddress.text.toString()
+        if (!Patterns.EMAIL_ADDRESS.matcher(emailAddress).matches()) {
+            return "Invalid Email Address"
+        }
+        return null
+    }
+
+    // save email Fields to shared preferences file
+    // and return to MainActivity
     fun onSave(view: View) {
-        // save email Fields
+
         val pref = getSharedPreferences("EmailPrefs",Context.MODE_PRIVATE)
         val editor = pref.edit()
 

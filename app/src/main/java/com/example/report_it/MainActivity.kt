@@ -62,18 +62,7 @@ class MainActivity : AppCompatActivity() {
         getEmailFields() // from Shared Preferences File
 
         binding.button1.setOnClickListener {
-            try {
-                val imageFile = createImageFile()
-                val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                val authorities = packageName + ".fileprovider"
-                val imageUri = FileProvider.getUriForFile(this, authorities, imageFile)
-                Log.d("MainActivity", "imageUri =" + imageUri.toString())
-                uriForImage = imageUri
-                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
-                resultLauncher.launch(cameraIntent)
-            } catch (e: Exception) {
-                Toast.makeText(this, "Could not create file!", Toast.LENGTH_LONG).show()
-            }
+            do_all()
         }
 
         binding.editButton.setOnClickListener {
@@ -81,6 +70,14 @@ class MainActivity : AppCompatActivity() {
             Log.d("MainActivity", "EDIT pressed")
             startActivity(intent)
         }
+    }
+
+    private fun do_all() {
+        getImageUri()
+
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriForImage)
+        resultLauncher.launch(cameraIntent)
     }
 
     private val resultLauncher  = registerForActivityResult(
@@ -105,6 +102,17 @@ class MainActivity : AppCompatActivity() {
         imageFilePath = imageFile.absolutePath
         Log.d("MainActivity", imageFilePath )
         return imageFile
+    }
+
+    private fun getImageUri() {
+        try {
+            val imageFile = createImageFile()
+            val authorities = packageName + ".fileprovider"
+            uriForImage = FileProvider.getUriForFile(this, authorities, imageFile)
+            Log.d("MainActivity", "imageUri =" + uriForImage.toString())
+        } catch (e: Exception) {
+            Toast.makeText(this, "Could not create file!", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun sendEmail() {

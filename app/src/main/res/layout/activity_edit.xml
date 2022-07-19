@@ -14,7 +14,6 @@
             android:id="@+id/addressContainer"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_marginHorizontal="20dp"
-            app:helperText="@string/required"
             app:helperTextTextColor="@android:color/holo_red_dark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,14 +28,13 @@
                 android:layout_height="match_parent"
                 android:lines="1"
                 android:inputType="textEmailAddress"
-                android:hint="@string/Address"/>
+                android:hint="@string/addressHint"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/subjectContainer"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_marginHorizontal="20dp"
-            app:helperText="@string/required"
             app:helperTextTextColor="@android:color/holo_red_dark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,14 +49,13 @@
                 android:layout_height="match_parent"
                 android:lines="1"
                 android:inputType="textEmailSubject"
-                android:hint="@string/Subject"/>
+                android:hint="@string/subjectHint"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/bodyContainer"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_marginHorizontal="20dp"
-            app:helperText="@string/required"
             app:helperTextTextColor="@android:color/holo_red_dark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -73,7 +70,7 @@
                 android:layout_height="match_parent"
                 android:lines="5"
                 android:inputType="textMultiLine"
-                android:hint="@string/Body"/>
+                android:hint="@string/bodyHint"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton

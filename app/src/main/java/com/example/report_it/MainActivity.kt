@@ -61,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         getEmailFields() // from Shared Preferences File, displayed by xml binding
 
+        // short button presses invoke intents
         binding.button1.setOnClickListener {
             emailAddress = emailFields.address1
             emailSubject = emailFields.subject1
@@ -94,6 +95,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+        // long button presses invoke editing
         binding.button2.setOnLongClickListener{
             edit(2)
             true
@@ -108,15 +110,6 @@ class MainActivity : AppCompatActivity() {
             edit(4)
             true
         }
-
-//        binding.editButton.setOnClickListener {
-//            val intent = Intent(this, EditActivity::class.java)
-//            Log.d("MainActivity", "EDIT pressed")
-//            startActivity(intent)
-//        }
-
-
-
     }
 
     private fun edit(btn :Int) {

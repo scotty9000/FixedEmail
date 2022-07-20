@@ -4,10 +4,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.util.Log
 import android.util.Patterns
-import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.report_it.databinding.ActivityEditBinding
@@ -24,9 +22,9 @@ class EditActivity : AppCompatActivity() {
 
         // get shared data
         val pref = getSharedPreferences("EmailPrefs",Context.MODE_PRIVATE)
-        var address = pref.getString("Address1","x")
-        var subject = pref.getString("Subject1","x")
-        var body = pref.getString("Body1","x")
+        var address = pref.getString("Address1","")
+        var subject = pref.getString("Subject1","")
+        var body = pref.getString("Body1","")
 
         binding.saveButton.setOnClickListener {
             save(btn)
@@ -34,39 +32,34 @@ class EditActivity : AppCompatActivity() {
 
         when (btn) {
             1-> {
-                address = pref.getString("Address1","x1")
-                subject = pref.getString("Subject1","x1")
-                body = pref.getString("Body1","x1")
+                address = pref.getString("Address1","")
+                subject = pref.getString("Subject1","")
+                body = pref.getString("Body1","")
             }
 
             2-> {
-                address = pref.getString("Address2","x2")
-                subject = pref.getString("Subject2","x2")
-                body = pref.getString("Body2","x2")
+                address = pref.getString("Address2","")
+                subject = pref.getString("Subject2","")
+                body = pref.getString("Body2","")
             }
 
             3-> {
-                address = pref.getString("Address3","x3")
-                subject = pref.getString("Subject3","x3")
-                body = pref.getString("Body3","x3")
+                address = pref.getString("Address3","")
+                subject = pref.getString("Subject3","")
+                body = pref.getString("Body3","")
             }
 
             4-> {
-                address = pref.getString("Address4","x4")
-                subject = pref.getString("Subject4","x4")
-                body = pref.getString("Body4","x4")
+                address = pref.getString("Address4","")
+                subject = pref.getString("Subject4","")
+                body = pref.getString("Body4","")
             }
 
             else -> {
                 Toast.makeText(this, "InValid Btn !!??", Toast.LENGTH_LONG).show()
             }
-
-
-
         }
-//        val address = pref.getString("Address","")
-//        val subject = pref.getString("Subject","")
-//        val body = pref.getString("Body","")
+        // display the text
         binding.editAddress.setText(address)
         binding.editSubject.setText(subject)
         binding.editBody.setText(body)
@@ -132,7 +125,6 @@ class EditActivity : AppCompatActivity() {
                 Log.d("EditActivity", "Invalid Button in save()")
             }
         }
-
 
 
         val intent = Intent(this, MainActivity::class.java)

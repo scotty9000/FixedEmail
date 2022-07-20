@@ -1,13 +1,11 @@
 <resources>
     <string name="app_name">Report_It</string>
     <string name="Button1">1</string>
-    <string name="editButton">EDIT</string>
     <string name="subjectHint">Subject</string>
     <string name="addressHint">Address</string>
-    <string name="enter_email_address">Enter email Address</string>
-    <string name="save">SAVE</string>
     <string name="bodyHint">Body text</string>
-    <string name="enter_email_subject">Enter email Subject</string>
-    <string name="email">Email</string>
-    <string name="required">Required</string>
+    <string name="save">SAVE</string>
+    <string name="long_press_button_to_edit_email_subject">Long Press button to edit email subject</string>
+    <string name="long_press_button_to_edit_email_address">Long Press button to edit email address</string>
+    <string name="long_press_a_button_to_edit_the_email_address_subject_and_body">Instructions:\n short press a button to send a message\n long press a button to edit the email address, subject and body</string>
 </resources>

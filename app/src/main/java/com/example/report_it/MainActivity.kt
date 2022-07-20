@@ -16,6 +16,7 @@ import android.os.Build.VERSION.SDK_INT
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
+import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
@@ -42,10 +43,10 @@ import java.util.function.Consumer
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val emailFields: EmailFields = EmailFields("",
-        "",
-        ""
-    )
+    private val emailFields: EmailFields = EmailFields()
+    private lateinit var emailAddress: String
+    private lateinit var emailSubject: String
+    private lateinit var emailBody: String
 
     private lateinit var locationManager: LocationManager
     private val locationPermissionCode = 2
@@ -53,24 +54,77 @@ class MainActivity : AppCompatActivity() {
     private lateinit var gpsLat : String
 
     lateinit var imageFilePath: String
-
     lateinit var uriForImage: Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        getEmailFields() // from Shared Preferences File
+        getEmailFields() // from Shared Preferences File, displayed by xml binding
 
         binding.button1.setOnClickListener {
+            emailAddress = emailFields.address1
+            emailSubject = emailFields.subject1
+            emailBody = emailFields.body1
             do_all()
         }
 
-        binding.editButton.setOnClickListener {
-            val intent = Intent(this, EditActivity::class.java)
-            Log.d("MainActivity", "EDIT pressed")
-            startActivity(intent)
+        binding.button2.setOnClickListener {
+            emailAddress = emailFields.address2
+            emailSubject = emailFields.subject2
+            emailBody = emailFields.body2
+            do_all()
         }
+
+        binding.button3.setOnClickListener {
+            emailAddress = emailFields.address3
+            emailSubject = emailFields.subject3
+            emailBody = emailFields.body3
+            do_all()
+        }
+
+        binding.button4.setOnClickListener {
+            emailAddress = emailFields.address4
+            emailSubject = emailFields.subject4
+            emailBody = emailFields.body4
+            do_all()
+        }
+
+        binding.button1.setOnLongClickListener{
+            edit(1)
+            true
+        }
+
+        binding.button2.setOnLongClickListener{
+            edit(2)
+            true
+        }
+
+        binding.button3.setOnLongClickListener{
+            edit(3)
+            true
+        }
+
+        binding.button4.setOnLongClickListener{
+            edit(4)
+            true
+        }
+
+//        binding.editButton.setOnClickListener {
+//            val intent = Intent(this, EditActivity::class.java)
+//            Log.d("MainActivity", "EDIT pressed")
+//            startActivity(intent)
+//        }
+
+
+
     }
+
+    private fun edit(btn :Int) {
+        val intent = Intent(this, EditActivity::class.java).apply{putExtra("btn", btn)}
+        Log.d("MainActivity", "In edit()")
+        startActivity(intent)
+    }
+
 
     private fun do_all() {
         getImageUri()
@@ -121,13 +175,13 @@ class MainActivity : AppCompatActivity() {
         emailSelectorIntent.setData(Uri.parse("mailto:"))
         val emailIntent = Intent(Intent.ACTION_SEND)
         emailIntent.type = "message/rfc822"
-        val to = arrayOf(emailFields.address)
+        val to = arrayOf(emailAddress)
         emailIntent.putExtra(Intent.EXTRA_EMAIL, to)
         emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         emailIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         emailIntent.putExtra(Intent.EXTRA_STREAM, uriForImage)
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, emailFields.subject)
-        emailIntent.putExtra(Intent.EXTRA_TEXT, emailFields.body  + "\n" + "Latitude = " + gpsLat + "\n" + "Longitude = " + gpsLong)
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, emailSubject)
+        emailIntent.putExtra(Intent.EXTRA_TEXT, emailBody  + "\n" + "Latitude = " + gpsLat + "\n" + "Longitude = " + gpsLong)
         startActivity(Intent.createChooser(emailIntent, "Send email..."))
     }
 
@@ -161,10 +215,23 @@ class MainActivity : AppCompatActivity() {
 
     private fun getEmailFields() {
         val pref = getSharedPreferences("EmailPrefs", Context.MODE_PRIVATE)
-        emailFields.address = pref.getString("Address", "").toString()
-        emailFields.subject = pref.getString("Subject", "").toString()
-        emailFields.body = pref.getString("Body", "").toString()
+        emailFields.address1 = pref.getString("Address1", "").toString()
+        emailFields.subject1 = pref.getString("Subject1", "").toString()
+        emailFields.body1 = pref.getString("Body1", "").toString()
+
+        emailFields.address2 = pref.getString("Address2", "").toString()
+        emailFields.subject2 = pref.getString("Subject2", "").toString()
+        emailFields.body2 = pref.getString("Body2", "").toString()
+
+        emailFields.address3 = pref.getString("Address3", "").toString()
+        emailFields.subject3 = pref.getString("Subject3", "").toString()
+        emailFields.body3 = pref.getString("Body3", "").toString()
+
+        emailFields.address4 = pref.getString("Address4", "").toString()
+        emailFields.subject4 = pref.getString("Subject4", "").toString()
+        emailFields.body4 = pref.getString("Body4", "").toString()
+
         binding.emailFields = emailFields
-        Log.d("MainActivity", emailFields.address )
+        Log.d("MainActivity", emailFields.address1 )
     }
 }

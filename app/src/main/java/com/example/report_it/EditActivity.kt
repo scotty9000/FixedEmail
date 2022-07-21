@@ -18,7 +18,7 @@ class EditActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit)
 
         val btn = intent.getIntExtra("btn", 0)
-        Toast.makeText(this, btn.toString(), Toast.LENGTH_LONG).show()
+        //Toast.makeText(this, btn.toString(), Toast.LENGTH_LONG).show()
 
         // get shared data
         val pref = getSharedPreferences("EmailPrefs",Context.MODE_PRIVATE)

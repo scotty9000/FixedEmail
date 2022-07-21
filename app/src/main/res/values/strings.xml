@@ -7,5 +7,5 @@
     <string name="save">SAVE</string>
     <string name="long_press_button_to_edit_email_subject">Long Press button to edit email subject</string>
     <string name="long_press_button_to_edit_email_address">Long Press button to edit email address</string>
-    <string name="long_press_a_button_to_edit_the_email_address_subject_and_body">Instructions:\n short press a button to send a message\n long press a button to edit the email address, subject and body</string>
+    <string name="long_press_a_button_to_edit_the_email_address_subject_and_body"><b>Instructions:</b>\nShort press a button to send a message\nLong press a button to edit the email address, subject and body</string>
 </resources>

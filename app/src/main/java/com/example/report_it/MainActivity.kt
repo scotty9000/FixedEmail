@@ -163,9 +163,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun sendEmail() {
-        Toast.makeText(this, "sending email ...", Toast.LENGTH_LONG).show()
-        val emailSelectorIntent = Intent(Intent.ACTION_SENDTO)
-        emailSelectorIntent.setData(Uri.parse("mailto:"))
+        Toast.makeText(this, "choose your email app  ...", Toast.LENGTH_LONG).show()
         val emailIntent = Intent(Intent.ACTION_SEND)
         emailIntent.type = "message/rfc822"
         val to = arrayOf(emailAddress)
@@ -175,7 +173,11 @@ class MainActivity : AppCompatActivity() {
         emailIntent.putExtra(Intent.EXTRA_STREAM, uriForImage)
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, emailSubject)
         emailIntent.putExtra(Intent.EXTRA_TEXT, emailBody  + "\n" + "Latitude = " + gpsLat + "\n" + "Longitude = " + gpsLong)
-        startActivity(Intent.createChooser(emailIntent, "Send email..."))
+        if (emailIntent.resolveActivity(packageManager) != null) {
+            startActivity(Intent.createChooser(emailIntent, "Send email..."))
+        } else {
+            Toast.makeText(this, " Sorry, cannot find an email app on this device ", Toast.LENGTH_LONG).show()
+        }
     }
 
 

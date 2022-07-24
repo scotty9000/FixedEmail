@@ -18,7 +18,6 @@ class EditActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit)
 
         val btn = intent.getIntExtra("btn", 0)
-        //Toast.makeText(this, btn.toString(), Toast.LENGTH_LONG).show()
 
         // get shared data
         val pref = getSharedPreferences("EmailPrefs",Context.MODE_PRIVATE)
@@ -96,7 +95,6 @@ class EditActivity : AppCompatActivity() {
                 editor.putString("Subject1", binding.editSubject.text.toString())
                 editor.putString("Body1", binding.editBody.text.toString())
                 editor.commit()
-                Log.d("EditActivity", "save(1)")
             }
 
             2 -> {
@@ -122,13 +120,11 @@ class EditActivity : AppCompatActivity() {
 
             else -> {
                 Toast.makeText(this, "InValid Btn !!??", Toast.LENGTH_LONG).show()
-                Log.d("EditActivity", "Invalid Button in save()")
             }
         }
 
 
         val intent = Intent(this, MainActivity::class.java)
-        Log.d("EditActivity", "SAVE pressed")
         startActivity(intent)
     }
 }

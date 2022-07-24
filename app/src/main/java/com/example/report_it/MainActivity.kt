@@ -114,7 +114,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun edit(btn :Int) {
         val intent = Intent(this, EditActivity::class.java).apply{putExtra("btn", btn)}
-        Log.d("MainActivity", "In edit()")
         startActivity(intent)
     }
 
@@ -130,12 +129,9 @@ class MainActivity : AppCompatActivity() {
     private val resultLauncher  = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()) {result ->
         if(result.resultCode == Activity.RESULT_OK) {
-            Log.d("MainActivity", "Camera Intent RESULT OK")
-
             getLocation()
-
             } else {
-            Log.d("MainActivity", "Camera Intent RESULT NOT OK")
+            Toast.makeText(this, "Camera Intent RESULT NOT OK", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -147,7 +143,6 @@ class MainActivity : AppCompatActivity() {
         if(!storageDir!!.exists()) storageDir.mkdirs()
         val imageFile = createTempFile(imageFileName, ".jpg", storageDir)
         imageFilePath = imageFile.absolutePath
-        Log.d("MainActivity", imageFilePath )
         return imageFile
     }
 
@@ -156,7 +151,6 @@ class MainActivity : AppCompatActivity() {
             val imageFile = createImageFile()
             val authorities = packageName + ".fileprovider"
             uriForImage = FileProvider.getUriForFile(this, authorities, imageFile)
-            Log.d("MainActivity", "imageUri =" + uriForImage.toString())
         } catch (e: Exception) {
             Toast.makeText(this, "Could not create file!", Toast.LENGTH_LONG).show()
         }
@@ -189,8 +183,16 @@ class MainActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this,arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionCode)
         }
 
-        if (SDK_INT >= android.os.Build.VERSION_CODES.R)
-        locationManager.getCurrentLocation(LocationManager.GPS_PROVIDER, null, this.mainExecutor, locationCallback)
+        if (SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            locationManager.getCurrentLocation(
+                LocationManager.GPS_PROVIDER,
+                null,
+                this.mainExecutor,
+                locationCallback
+            )
+        } else {
+            Toast.makeText(this, " location is NULL ", Toast.LENGTH_LONG).show()
+        }
     }
 
 
@@ -227,6 +229,5 @@ class MainActivity : AppCompatActivity() {
         emailFields.body4 = pref.getString("Body4", "").toString()
 
         binding.emailFields = emailFields
-        Log.d("MainActivity", emailFields.address1 )
     }
 }

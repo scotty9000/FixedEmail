@@ -7,7 +7,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.example.report_it"
+        applicationId "com.ulogic.report_it"
         minSdk 30
         targetSdk 32
         versionCode 1

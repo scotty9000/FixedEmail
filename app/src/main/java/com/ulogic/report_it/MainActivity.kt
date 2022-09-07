@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.location.Location
 import android.location.LocationManager
 import androidx.exifinterface.media.ExifInterface
@@ -105,12 +106,12 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-
     private fun do_all() {
         getImageUri()
 
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriForImage)
+        cameraIntent.putExtra(MediaStore.EXTRA_SIZE_LIMIT, 1048576L)
         resultLauncher.launch(cameraIntent)
     }
 
@@ -162,7 +163,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     private fun getLocation() {
         Toast.makeText(this, "getting location ...", Toast.LENGTH_LONG).show()
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -179,10 +179,9 @@ class MainActivity : AppCompatActivity() {
                 locationCallback
             )
         } else {
-            Toast.makeText(this, " location is NULL ", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, " location is NULL, have you enabled GPS? ", Toast.LENGTH_LONG).show()
         }
     }
-
 
     private val locationCallback = Consumer<Location> { location ->
         if (null != location) {
@@ -192,6 +191,7 @@ class MainActivity : AppCompatActivity() {
             var exif = ExifInterface(imageFilePath)
             exif.setLatLong (location.latitude, location.longitude)
             exif.saveAttributes()
+            //compressImage()
             sendEmail()
         } else {
             Toast.makeText(this, " location is NULL ", Toast.LENGTH_LONG).show()
@@ -218,4 +218,39 @@ class MainActivity : AppCompatActivity() {
 
         binding.emailFields = emailFields
     }
+
+//    private fun setPic() {
+//        // Get the dimensions of the View
+//        //val targetW: Int = imageView.width
+//        //val targetH: Int = imageView.height
+//
+//        val targetW: Int = 800
+//        val targetH: Int = 640
+//
+//        val bmOptions = BitmapFactory.Options().apply {
+//            // Get the dimensions of the bitmap
+//            inJustDecodeBounds = true
+//
+//            BitmapFactory.decodeFile(currentPhotoPath, bmOptions)
+//
+//            val photoW: Int = outWidth
+//            val photoH: Int = outHeight
+//
+//            // Determine how much to scale down the image
+//            val scaleFactor: Int = Math.max(1, Math.min(photoW / targetW, photoH / targetH))
+//
+//            // Decode the image file into a Bitmap sized to fill the View
+//            inJustDecodeBounds = false
+//            inSampleSize = scaleFactor
+//            inPurgeable = true
+//        }
+//        BitmapFactory.decodeFile(currentPhotoPath, bmOptions)?.also { bitmap ->
+//            imageView.setImageBitmap(bitmap)
+//        }
+//    }
+//
+//    private fun compressImage() {
+//
+//    }
+
 }

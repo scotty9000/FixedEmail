@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity() {
 
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriForImage)
-        cameraIntent.putExtra(MediaStore.EXTRA_SIZE_LIMIT, 1048576L)
+        cameraIntent.putExtra(MediaStore.EXTRA_SIZE_LIMIT, 1048576L) // does not appear to have any effect
         resultLauncher.launch(cameraIntent)
     }
 
@@ -179,7 +179,7 @@ class MainActivity : AppCompatActivity() {
                 locationCallback
             )
         } else {
-            Toast.makeText(this, " location is NULL, have you enabled GPS? ", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, " SDK error ", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -194,7 +194,7 @@ class MainActivity : AppCompatActivity() {
             //compressImage()
             sendEmail()
         } else {
-            Toast.makeText(this, " location is NULL ", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, " location is NULL, have you enabled GPS? ", Toast.LENGTH_LONG).show()
         }
     }
 

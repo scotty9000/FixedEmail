@@ -15,7 +15,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher1_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Report_It">
+        android:theme="@style/Theme.Fixed_Email">
         <activity
             android:name="com.ulogic.fixed_email.EditActivity"
             android:parentActivityName="com.ulogic.fixed_email.MainActivity"

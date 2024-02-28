@@ -1,4 +1,4 @@
-package com.ulogic.report_it
+package com.ulogic.fixed_email
 
 import org.junit.Test
 

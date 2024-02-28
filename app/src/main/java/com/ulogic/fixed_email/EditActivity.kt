@@ -1,4 +1,4 @@
-package com.ulogic.report_it
+package com.ulogic.fixed_email
 
 import android.content.Context
 import android.content.Intent
@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import com.ulogic.report_it.databinding.ActivityEditBinding
+import com.ulogic.fixed_email.databinding.ActivityEditBinding
 
 class EditActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditBinding

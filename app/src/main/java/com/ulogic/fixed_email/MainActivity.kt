@@ -1,11 +1,10 @@
-package com.ulogic.report_it
+package com.ulogic.fixed_email
 
 import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
 import android.location.Location
 import android.location.LocationManager
 import androidx.exifinterface.media.ExifInterface
@@ -21,7 +20,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
-import com.ulogic.report_it.databinding.ActivityMainBinding
+import com.ulogic.fixed_email.databinding.ActivityMainBinding
 import java.io.File
 import java.io.File.createTempFile
 import java.io.IOException

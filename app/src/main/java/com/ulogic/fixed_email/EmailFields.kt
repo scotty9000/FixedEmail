@@ -1,4 +1,4 @@
-package com.ulogic.report_it
+package com.ulogic.fixed_email
 
 data class EmailFields(
     var address1: String = "",

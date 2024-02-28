@@ -7,7 +7,7 @@
     <data>
         <variable
             name = "emailFields"
-            type = "com.ulogic.report_it.EmailFields" />
+            type = "com.ulogic.fixed_email.EmailFields" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

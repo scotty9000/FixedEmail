@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Report_It</string>
+    <string name="app_name">Fixed_Email</string>
     <string name="Button1">1</string>
     <string name="subjectHint">Subject</string>
     <string name="addressHint">Address</string>

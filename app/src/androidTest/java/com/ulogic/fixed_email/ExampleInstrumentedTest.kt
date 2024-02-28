@@ -1,4 +1,4 @@
-package com.ulogic.report_it
+package com.ulogic.fixed_email
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

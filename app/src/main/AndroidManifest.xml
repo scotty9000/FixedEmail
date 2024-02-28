@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ulogic.report_it">
+    package="com.ulogic.fixed_email">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -17,11 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Report_It">
         <activity
-            android:name="com.ulogic.report_it.EditActivity"
-            android:parentActivityName="com.ulogic.report_it.MainActivity"
+            android:name="com.ulogic.fixed_email.EditActivity"
+            android:parentActivityName="com.ulogic.fixed_email.MainActivity"
             android:exported="false" />
         <activity
-            android:name="com.ulogic.report_it.MainActivity"
+            android:name="com.ulogic.fixed_email.MainActivity"
             android:screenOrientation = "portrait"
             android:exported="true">
             <intent-filter>

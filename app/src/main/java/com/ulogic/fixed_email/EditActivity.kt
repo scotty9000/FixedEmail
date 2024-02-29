@@ -35,24 +35,6 @@ class EditActivity : AppCompatActivity() {
                 body = pref.getString("Body1","")
             }
 
-            2-> {
-                address = pref.getString("Address2","")
-                subject = pref.getString("Subject2","")
-                body = pref.getString("Body2","")
-            }
-
-            3-> {
-                address = pref.getString("Address3","")
-                subject = pref.getString("Subject3","")
-                body = pref.getString("Body3","")
-            }
-
-            4-> {
-                address = pref.getString("Address4","")
-                subject = pref.getString("Subject4","")
-                body = pref.getString("Body4","")
-            }
-
             else -> {
                 Toast.makeText(this, "InValid Btn !!??", Toast.LENGTH_LONG).show()
             }
@@ -93,27 +75,6 @@ class EditActivity : AppCompatActivity() {
                 editor.putString("Address1", binding.editAddress.text.toString())
                 editor.putString("Subject1", binding.editSubject.text.toString())
                 editor.putString("Body1", binding.editBody.text.toString())
-                editor.commit()
-            }
-
-            2 -> {
-                editor.putString("Address2", binding.editAddress.text.toString())
-                editor.putString("Subject2", binding.editSubject.text.toString())
-                editor.putString("Body2", binding.editBody.text.toString())
-                editor.commit()
-            }
-
-            3 -> {
-                editor.putString("Address3", binding.editAddress.text.toString())
-                editor.putString("Subject3", binding.editSubject.text.toString())
-                editor.putString("Body3", binding.editBody.text.toString())
-                editor.commit()
-            }
-
-            4 -> {
-                editor.putString("Address4", binding.editAddress.text.toString())
-                editor.putString("Subject4", binding.editSubject.text.toString())
-                editor.putString("Body4", binding.editBody.text.toString())
                 editor.commit()
             }
 

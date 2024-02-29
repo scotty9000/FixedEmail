@@ -20,7 +20,7 @@ class EditActivity : AppCompatActivity() {
 
         // get shared data
         val pref = getSharedPreferences("EmailPrefs",Context.MODE_PRIVATE)
-        var address = pref.getString("Address1","")
+        val address = pref.getString("Address1","") // note val not var
         var subject = pref.getString("Subject1","")
         var body = pref.getString("Body1","")
 
@@ -30,7 +30,7 @@ class EditActivity : AppCompatActivity() {
 
         when (btn) {
             1-> {
-                address = pref.getString("Address1","")
+                //address = pref.getString("Address1","")
                 subject = pref.getString("Subject1","")
                 body = pref.getString("Body1","")
             }
@@ -40,28 +40,28 @@ class EditActivity : AppCompatActivity() {
             }
         }
         // display the text
-        binding.editAddress.setText(address)
+        //binding.editAddress.setText(address)
         binding.editSubject.setText(subject)
         binding.editBody.setText(body)
 
-        emailFocusListener()
+        //emailFocusListener()
     }
 
-    private fun emailFocusListener() {
-        binding.editAddress.setOnFocusChangeListener{_, focused ->
-            if(!focused){
-                binding.addressContainer.helperText = validEmail()
-            }
-        }
-    }
+//    private fun emailFocusListener() {
+//        binding.editAddress.setOnFocusChangeListener{_, focused ->
+//            if(!focused){
+//                binding.addressContainer.helperText = validEmail()
+//            }
+//        }
+//    }
 
-    private fun validEmail(): String? {
-        val emailAddress = binding.editAddress.text.toString()
-        if (!Patterns.EMAIL_ADDRESS.matcher(emailAddress).matches()) {
-            return "Invalid Email Address"
-        }
-        return null
-    }
+//    private fun validEmail(): String? {
+//        val emailAddress = binding.editAddress.text.toString()
+//        if (!Patterns.EMAIL_ADDRESS.matcher(emailAddress).matches()) {
+//            return "Invalid Email Address"
+//        }
+//        return null
+//    }
 
     // save email Fields to shared preferences file
     // and return to MainActivity
@@ -72,7 +72,7 @@ class EditActivity : AppCompatActivity() {
 
         when (btn) {
             1 -> {
-                editor.putString("Address1", binding.editAddress.text.toString())
+                //editor.putString("Address1", binding.editAddress.text.toString())
                 editor.putString("Subject1", binding.editSubject.text.toString())
                 editor.putString("Body1", binding.editBody.text.toString())
                 editor.commit()

@@ -21,51 +21,51 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:text="@string/Button1"
             android:textSize="40sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/instructionText" />
 
         <TextView
             android:id="@+id/textEmailAddress1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/roboto"
-            android:hint="@string/Note_the_email_address_is_fixed_and_cannot_be_edited"
-            android:text="@={emailFields.address1}"
-            android:textSize="@dimen/text_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/button1"
-            app:layout_constraintTop_toTopOf="@+id/button1" />
+            android:text="@{emailFields.to + emailFields.address1}"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button1" />
 
         <TextView
             android:id="@+id/textEmailSubject1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/roboto"
             android:hint="@string/long_press_button_to_edit_email_subject"
-            android:text="@={emailFields.subject1}"
+            android:text="@{emailFields.subject + emailFields.subject1}"
             android:textSize="@dimen/text_size"
-            app:layout_constraintBaseline_toBaselineOf="@+id/button1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/button1"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textEmailAddress1" />
 
         <TextView
             android:id="@+id/instructionText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_marginBottom="20dp"
             android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/border"
             android:gravity="start|top"
             android:inputType="textMultiLine"
+            android:padding="10dp"
             android:text="@string/long_press_the_button_to_edit_the_email_subject_and_body"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

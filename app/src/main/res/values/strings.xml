@@ -1,8 +1,7 @@
 <resources>
-    <string name="app_name">Fixed_Email</string>
-    <string name="Button1"></string>
+    <string name="app_name">TellCornwallCouncil</string>
+    <string name="Button1">Go</string>
     <string name="subjectHint">Subject</string>
-    <string name="addressHint">Address</string>
     <string name="bodyHint">Body text</string>
     <string name="save">SAVE</string>
     <string name="long_press_button_to_edit_email_subject">Long Press button to edit email subject</string>

@@ -20,7 +20,7 @@ class EditActivity : AppCompatActivity() {
 
         // get shared data
         val pref = getSharedPreferences("EmailPrefs",Context.MODE_PRIVATE)
-        val address = pref.getString("Address1","") // note val not var
+        //val address = pref.getString("Address1","") // note val not var
         var subject = pref.getString("Subject1","")
         var body = pref.getString("Body1","")
 

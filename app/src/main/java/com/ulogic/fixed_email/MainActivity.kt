@@ -7,19 +7,19 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
-import androidx.exifinterface.media.ExifInterface
 import android.net.Uri
 import android.os.Build.VERSION.SDK_INT
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
+import androidx.exifinterface.media.ExifInterface
 import com.ulogic.fixed_email.databinding.ActivityMainBinding
 import java.io.File
 import java.io.File.createTempFile
@@ -27,6 +27,7 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.function.Consumer
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -51,7 +52,8 @@ class MainActivity : AppCompatActivity() {
 
         // short button presses invoke intents
         binding.button1.setOnClickListener {
-            emailAddress = emailFields.address1
+            //emailAddress = "martin.vhdl@gmail.com"
+            emailAddress = getString(R.string.target_email_address)
             emailSubject = emailFields.subject1
             emailBody = emailFields.body1
             do_all()
@@ -109,7 +111,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun sendEmail() {
-        Toast.makeText(this, "choose your email app  ...", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "choose your email app  ...", Toast.LENGTH_SHORT).show()
         val emailIntent = Intent(Intent.ACTION_SEND)
         emailIntent.type = "message/rfc822"
         val to = arrayOf(emailAddress)
@@ -163,7 +165,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun getEmailFields() {
         val pref = getSharedPreferences("EmailPrefs", Context.MODE_PRIVATE)
-        emailFields.address1 = pref.getString("Address1", "").toString()
+        emailFields.address1 = getString(R.string.target_email_address) // hard coded
         emailFields.subject1 = pref.getString("Subject1", "").toString()
         emailFields.body1 = pref.getString("Body1", "").toString()
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TellCornwallCouncil</string>
+    <string name="app_name">Tell Cornwall Council</string>
     <string name="Button1">Go</string>
     <string name="subjectHint">Subject</string>
     <string name="bodyHint">Body text</string>

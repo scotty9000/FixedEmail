@@ -5,5 +5,5 @@
     <string name="bodyHint">Body text</string>
     <string name="save">SAVE</string>
     <string name="long_press_button_to_edit_email_subject">Long Press button to edit email subject</string>
-    <string name="long_press_the_button_to_edit_the_email_subject_and_body"><b>Instructions:</b>\nShort press the button to send a message\nLong press the button to edit the email subject and body. \nNote the email address is fixed and cannot be edited.</string>
+    <string name="long_press_the_button_to_edit_the_email_subject_and_body"><b>Instructions:</b>\nShort press the button to send a message\nLong press the button to edit the email subject and body. (The email address is fixed and cannot be edited).</string>
 </resources>

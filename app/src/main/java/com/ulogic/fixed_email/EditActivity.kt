@@ -14,7 +14,6 @@ class EditActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit)
-
         val btn = intent.getIntExtra("btn", 0)
 
         // get shared data

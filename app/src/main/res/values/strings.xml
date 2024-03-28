@@ -3,7 +3,7 @@
     <string name="Button1">Go</string>
     <string name="subjectHint">Subject</string>
     <string name="bodyHint">Body text</string>
-    <string name="target_email_address">report.it.test2022@gmail.com</string>
+    <string name="target_email_address">publicprotection@cornwall.gov.uk</string>
     <string name="save">SAVE</string>
     <string name="long_press_button_to_edit_email_subject">Long Press button to edit email subject</string>
     <string name="long_press_the_button_to_edit_the_email_subject_and_body"><b>Instructions:</b>\nShort press the button to send a message\nLong press the button to edit the email subject and body. (The email address is fixed and cannot be edited).</string>
